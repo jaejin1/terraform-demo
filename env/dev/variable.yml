@@ -1,0 +1,90 @@
+
+
+demo:
+  name: "test"
+  env: "dev"
+  
+  vpc:
+    name: "" # vpc 이름
+    subnet_private_filter: "*private*"
+
+  route53:
+    record:
+      name: "jaejin-demo" # 등록할 record 이름
+      type: "A"
+
+    host_zone_id: "" # 등록할 host zone id
+    elb_alias_name: "" # 등록할 elb DNS name
+    elb_alias_zone_id: "" # 등록할 elb hosted zone
+    
+  server:
+    jaejin-demo1:
+      ami_arch: "x86_64"
+      ami_id: ""
+      key_name: "" # key pairs name
+      security_group_additional_ids:
+        # - "sg-123456" 추가적으로 붙일 SG
+
+      iam_role_additional_policies:
+        # - "arn:aws:iam::1234567:policy/additional" 생성한 role에 추가로 붙일 policy
+
+      ebs:
+        ebs_block_device: 
+          - device_name: "/dev/sdf"
+            volume_type: "gp3"
+            volume_size: "8"
+            iops: "3000"
+            throughput: "125"
+          - device_name: "/dev/sdl"
+            volume_type: "gp3"
+            volume_size: "16"
+            iops: "3000"
+            throughput: "125"
+
+      asg:
+        instance_type: "t3.small"
+        min: 1
+        max: 1
+
+      target_group:
+        port: 80
+        protocol: "HTTP"
+      
+      elb:
+        listener_arn: "" # elb listener arn
+
+    # jaejin-demo2:
+    #   ami_arch: "x86_64"
+    #   ami_id: ""
+    #   key_name: ""
+    #   security_group_additional_ids:
+    #     - ""
+
+    #   iam_role_additional_policies:
+    #     # - ""
+
+    #   ebs:
+    #     ebs_block_device: 
+    #       - device_name: "/dev/sdf"
+    #         volume_type: "gp3"
+    #         volume_size: "8"
+    #         iops: "3000"
+    #         throughput: "125"
+    #       - device_name: "/dev/sdl"
+    #         volume_type: "gp3"
+    #         volume_size: "16"
+    #         iops: "3000"
+    #         throughput: "125"
+
+    #   asg:
+    #     instance_type: "t3.small"
+    #     min: 0
+    #     max: 0
+
+    #   target_group:
+    #     port: 80
+    #     protocol: "HTTP"
+      
+    #   elb:
+    #     listener_arn: ""
+
