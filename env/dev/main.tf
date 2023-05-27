@@ -105,7 +105,7 @@ module "deploy" {
         for k, v in local.tf_vars.demo.server:
         k => v
     }
-
+ 
     service = each.key
     env = local.tf_vars.demo.env
 
